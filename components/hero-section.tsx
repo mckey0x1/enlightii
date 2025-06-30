@@ -101,14 +101,14 @@ export default function HeroSection() {
         </div>
 
         {/* Main heading with typewriter effect */}
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
           <span className="text-white">{text}</span>
           <span className="animate-pulse text-white">|</span>
         </h1>
 
         {/* Subheading */}
-        <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-4xl mx-auto leading-relaxed">
-          Transform your ideas into reality with the power of artificial intelligence. 
+        <p className="text-xl md:text-xl text-white/80 mb-12 max-w-4xl mx-auto leading-relaxed">
+          {/* Transform your ideas into reality with the power of artificial intelligence.  */}
           Build beautiful, functional applications through natural conversation.
         </p>
 
@@ -234,7 +234,7 @@ export default function HeroSection() {
         </div>
 
         {/* Stats */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+        {/* <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
           <div className="text-center">
             <div className="text-3xl md:text-4xl font-bold text-white mb-2">10k+</div>
             <div className="text-white/60">Apps Created</div>
@@ -247,7 +247,7 @@ export default function HeroSection() {
             <div className="text-3xl md:text-4xl font-bold text-white mb-2">99%</div>
             <div className="text-white/60">Satisfaction</div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Scroll indicator */}

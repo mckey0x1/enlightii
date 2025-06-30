@@ -21,7 +21,7 @@ export default function Home() {
             Our AI-powered platform democratizes app development, making it accessible to 
             creators of all backgrounds and skill levels.
           </p>
-          <p className="text-lg text-gray-600 leading-relaxed">
+          <p className="text-lg text-gray-400 leading-relaxed">
             Join thousands of developers, entrepreneurs, and creators who are building 
             the next generation of applications with enlightii.
           </p>
