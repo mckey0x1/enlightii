@@ -50,7 +50,7 @@ export default function FeaturesSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-bold text-black mb-6">
-            Why Choose Lovable?
+            Why Choose enlightii?
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Experience the future of development with AI-powered tools that make app creation effortless and enjoyable.
