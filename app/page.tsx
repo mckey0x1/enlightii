@@ -9,7 +9,7 @@ export default function Home() {
     <main className="min-h-screen">
       <Navigation />
       <HeroSection />
-      <FeaturesSection />
+      {/* <FeaturesSection /> */}
       <DemoSection />
       <section id="about" className="relative py-24 bg-gradient-to-b from-white to-black">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
