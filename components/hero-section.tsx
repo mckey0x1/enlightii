@@ -16,8 +16,10 @@ import { Button } from "@/components/ui/button";
 import { useTRPC } from "@/trpc/client";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function HeroSection() {
+  const router = useRouter()
   const [text, setText] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [dragActive, setDragActive] = useState(false);
@@ -75,11 +77,13 @@ export default function HeroSection() {
   };
 
   const trpc = useTRPC();
-  const { data: messages } = useQuery(trpc.messages.getMany.queryOptions());
-  const createMessage = useMutation(
-    trpc.messages.create.mutationOptions({
-      onSuccess: () => {
-        toast.success("Message sent successfully!");
+  const createProject = useMutation(
+    trpc.projects.create.mutationOptions({
+      onError: (error) => {
+        toast.error(error.message);
+      }
+      ,onSuccess:(data)=>{
+        router.push(`/projects/${data.id}`);
       }
     })
   );
@@ -169,9 +173,9 @@ export default function HeroSection() {
                 <div className="flex items-center space-x-2 ml-3">
                   <Button
                     type="submit"
-                    disabled={createMessage.isPending}
+                    disabled={createProject.isPending}
                     onClick={() => {
-                      createMessage.mutate({ value: inputValue });
+                      createProject.mutate({ value: inputValue });
                     }}
                     className="bg-white text-black hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed px-6 py-2 rounded-full">
                     <Send className="h-4 w-4" />
