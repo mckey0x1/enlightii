@@ -2,6 +2,8 @@ import { TRPCReactProvider } from "@/trpc/client";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,10 +19,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <TRPCReactProvider>
-      <html lang="en" className="scroll-smooth">
-        <body className={inter.className}>{children}</body>
-      </html>
-    </TRPCReactProvider>
+    <ClerkProvider>
+      <TRPCReactProvider>
+        <html lang="en" className="scroll-smooth">
+          <body className={inter.className}>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange>
+              {children}
+            </ThemeProvider>
+          </body>
+        </html>
+      </TRPCReactProvider>
+    </ClerkProvider>
   );
 }

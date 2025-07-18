@@ -14,6 +14,7 @@ import { z } from "zod";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { PROJECT_TEMPLATES } from "../../constant";
+import { useClerk } from "@clerk/nextjs";
 
 const formSchema = z.object({
   value: z
@@ -27,6 +28,7 @@ export const ProjectForm = () => {
   const router = useRouter();
 
   const trpc = useTRPC();
+  const clerk = useClerk();
   const queryClient = useQueryClient();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -44,6 +46,9 @@ export const ProjectForm = () => {
       },
       onError: (error) => {
         toast.error(error.message);
+        if (error.data?.code === "UNAUTHORIZED") {
+          clerk.openSignIn();
+        }
       }
     })
   );
@@ -106,8 +111,8 @@ export const ProjectForm = () => {
               <Button
                 disabled={isButtonDisabled}
                 className={cn(
-                  "rounded-full h-10 w-10",
-                  isButtonDisabled && "bg-gray-900 border"
+                  "rounded-full h-10 w-10 ",
+                  isButtonDisabled && "bg-gray-900 dark:bg-white border"
                 )}>
                 {isPending ? (
                   <Loader2Icon className="size-4 animate-spin" />
@@ -123,8 +128,10 @@ export const ProjectForm = () => {
                 key={template.title}
                 variant="outline"
                 size="sm"
-                className="bg-white dark:bg-sidebar"
-                onClick={() => {onSelect(template.prompt)}}>
+                className="bg-sidebar"
+                onClick={() => {
+                  onSelect(template.prompt);
+                }}>
                 {template.emoji} {template.title}
               </Button>
             ))}

@@ -77,6 +77,7 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --sidebar: oklch(0.2357 0.0024 67.7077);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -102,18 +103,23 @@
   .bg-gradient-radial {
     background-image: radial-gradient(var(--tw-gradient-stops));
   }
-  
+
   .bg-gradient-conic {
-    background-image: conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops));
+    background-image: conic-gradient(
+      from 180deg at 50% 50%,
+      var(--tw-gradient-stops)
+    );
   }
 
   /* Torch-like gradient */
   .bg-torch-gradient {
-    background: radial-gradient(ellipse at center top, 
-      rgba(255, 255, 255, 0.8) 0%, 
-      rgba(255, 255, 255, 0.4) 30%, 
-      rgba(128, 128, 128, 0.6) 60%, 
-      rgba(0, 0, 0, 1) 100%);
+    background: radial-gradient(
+      ellipse at center top,
+      rgba(255, 255, 255, 0.8) 0%,
+      rgba(255, 255, 255, 0.4) 30%,
+      rgba(128, 128, 128, 0.6) 60%,
+      rgba(0, 0, 0, 1) 100%
+    );
   }
 }
 
@@ -124,8 +130,13 @@ html {
 
 /* Custom animations */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 .animate-float {
@@ -133,10 +144,11 @@ html {
 }
 
 @keyframes pulse-glow {
-  0%, 100% { 
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
   }
-  50% { 
+  50% {
     box-shadow: 0 0 40px rgba(255, 255, 255, 0.6);
   }
 }
@@ -145,12 +157,12 @@ html {
   animation: pulse-glow 3s ease-in-out infinite;
 }
 
-.txtaprompt{
-  overflow: auto;             /* Enable scrolling */
-  scrollbar-width: none;      /* Firefox */
-  -ms-overflow-style: none;  
+.txtaprompt {
+  overflow: auto; /* Enable scrolling */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
 }
 
 .txtaprompt::-webkit-scrollbar {
-  display: none;              /* Chrome, Safari, and Opera */
+  display: none; /* Chrome, Safari, and Opera */
 }

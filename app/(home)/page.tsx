@@ -22,7 +22,7 @@ export default function Home() {
             {/* Main heading with typewriter effect */}
             <div className="w-[80%] mx-auto">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-10 mb-8 leading-tight">
-                <span className="text-black">
+                <span className="text-black dark:text-white">
                   Create apps and websites by chatting with AI
                 </span>
                 {/* <span className="animate-pulse text-black">|</span> */}
@@ -30,7 +30,7 @@ export default function Home() {
             </div>
 
             {/* Subheading */}
-            <p className="text-xs md:text-base text-black/80 mb-12 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xs md:text-base dark:text-white text-black/80 mb-12 max-w-4xl mx-auto leading-relaxed">
               {/* Transform your ideas into reality with the power of artificial intelligence.  */}
               Build beautiful, functional applications through natural
               conversation.
