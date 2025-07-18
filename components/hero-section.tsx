@@ -17,9 +17,11 @@ import { useTRPC } from "@/trpc/client";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { ProjectForm } from "@/modules/home/ui/components/project-form";
+import { ProjectList } from "@/modules/home/ui/components/project-list";
 
 export default function HeroSection() {
-  const router = useRouter()
+  const router = useRouter();
   const [text, setText] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [dragActive, setDragActive] = useState(false);
@@ -81,8 +83,8 @@ export default function HeroSection() {
     trpc.projects.create.mutationOptions({
       onError: (error) => {
         toast.error(error.message);
-      }
-      ,onSuccess:(data)=>{
+      },
+      onSuccess: (data) => {
         router.push(`/projects/${data.id}`);
       }
     })
@@ -131,114 +133,7 @@ export default function HeroSection() {
 
         {/* Large Input Field */}
         <div className="max-w-3xl mx-auto mb-16">
-          <form onSubmit={handleSubmit} className="relative">
-            <div
-              className={`relative bg-white/10 backdrop-blur-lg border-2 rounded-3xl transition-all duration-300 ${
-                dragActive
-                  ? "border-white border-dashed bg-white/20"
-                  : "border-white/30 hover:border-white/50"
-              }`}
-              onDragEnter={handleDrag}
-              onDragLeave={handleDrag}
-              onDragOver={handleDrag}
-              onDrop={handleDrop}>
-              <div className="flex p-4">
-                {/* File upload button */}
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  onChange={handleFileSelect}
-                  className="hidden"
-                  accept="image/*"
-                />
-                <Button
-                  type="button"
-                  onClick={() => fileInputRef.current?.click()}
-                  variant="ghost"
-                  size="sm"
-                  className="text-white/70 hover:text-white hover:bg-white/10 mr-2">
-                  <Paperclip className="h-4 w-4" />
-                </Button>
-
-                {/* Main input */}
-                <textarea
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  placeholder="Describe your app idea, upload files, or ask anything..."
-                  className="w-full bg-transparent txtaprompt text-white placeholder-white/60 text-base pt-1 focus:outline-none resize-none min-h-[80px]"
-                  rows={2}
-                />
-
-                {/* Action buttons */}
-                <div className="flex items-center space-x-2 ml-3">
-                  <Button
-                    type="submit"
-                    disabled={createProject.isPending}
-                    onClick={() => {
-                      createProject.mutate({ value: inputValue });
-                    }}
-                    className="bg-white text-black hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed px-6 py-2 rounded-full">
-                    <Send className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-
-              {/* Quick action buttons */}
-              <div className="border-t border-white/20 p-4">
-                <div className="flex flex-wrap justify-center gap-3">
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    className="text-white/70 hover:text-white hover:bg-white/10 text-sm"
-                    onClick={() =>
-                      setInputValue("Create a modern e-commerce website")
-                    }>
-                    <Image className="h-4 w-4 mr-2" />
-                    E-commerce Site
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    className="text-white/70 hover:text-white hover:bg-white/10 text-sm"
-                    onClick={() =>
-                      setInputValue("Build a task management app")
-                    }>
-                    <FileText className="h-4 w-4 mr-2" />
-                    Task Manager
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    className="text-white/70 hover:text-white hover:bg-white/10 text-sm"
-                    onClick={() =>
-                      setInputValue("Design a social media dashboard")
-                    }>
-                    <Zap className="h-4 w-4 mr-2" />
-                    Dashboard
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-            {/* Drag and drop indicator */}
-            {dragActive && (
-              <div className="absolute inset-0 bg-white/20 backdrop-blur-sm rounded-3xl flex items-center justify-center">
-                <div className="text-center">
-                  <Upload className="h-12 w-12 text-white mx-auto mb-4" />
-                  <p className="text-white text-lg font-medium">
-                    Drop your files here
-                  </p>
-                </div>
-              </div>
-            )}
-          </form>
-
-          <p className="text-white/60 text-sm mt-4">
-            Supports text and images. Start typing or drag & drop to begin.
-          </p>
+          <ProjectForm />
         </div>
       </div>
 
@@ -251,3 +146,114 @@ export default function HeroSection() {
     </section>
   );
 }
+
+// <div className="max-w-3xl mx-auto mb-16">
+//   <form onSubmit={handleSubmit} className="relative">
+//     <div
+//       className={`relative bg-white/10 backdrop-blur-lg border-2 rounded-3xl transition-all duration-300 ${
+//         dragActive
+//           ? "border-white border-dashed bg-white/20"
+//           : "border-white/30 hover:border-white/50"
+//       }`}
+//       onDragEnter={handleDrag}
+//       onDragLeave={handleDrag}
+//       onDragOver={handleDrag}
+//       onDrop={handleDrop}>
+//       <div className="flex p-4">
+//         {/* File upload button */}
+//         <input
+//           type="file"
+//           ref={fileInputRef}
+//           onChange={handleFileSelect}
+//           className="hidden"
+//           accept="image/*"
+//         />
+//         <Button
+//           type="button"
+//           onClick={() => fileInputRef.current?.click()}
+//           variant="ghost"
+//           size="sm"
+//           className="text-white/70 hover:text-white hover:bg-white/10 mr-2">
+//           <Paperclip className="h-4 w-4" />
+//         </Button>
+
+//         {/* Main input */}
+//         <textarea
+//           value={inputValue}
+//           onChange={(e) => setInputValue(e.target.value)}
+//           placeholder="Describe your app idea, upload files, or ask anything..."
+//           className="w-full bg-transparent txtaprompt text-white placeholder-white/60 text-base pt-1 focus:outline-none resize-none min-h-[80px]"
+//           rows={2}
+//         />
+
+//         {/* Action buttons */}
+//         <div className="flex items-center space-x-2 ml-3">
+//           <Button
+//             type="submit"
+//             disabled={createProject.isPending}
+//             onClick={() => {
+//               createProject.mutate({ value: inputValue });
+//             }}
+//             className="bg-white text-black hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed px-6 py-2 rounded-full">
+//             <Send className="h-4 w-4" />
+//           </Button>
+//         </div>
+//       </div>
+
+//       {/* Quick action buttons */}
+//       <div className="border-t border-white/20 p-4">
+//         <div className="flex flex-wrap justify-center gap-3">
+//           <Button
+//             type="button"
+//             variant="ghost"
+//             size="sm"
+//             className="text-white/70 hover:text-white hover:bg-white/10 text-sm"
+//             onClick={() =>
+//               setInputValue("Create a modern e-commerce website")
+//             }>
+//             <Image className="h-4 w-4 mr-2" />
+//             E-commerce Site
+//           </Button>
+//           <Button
+//             type="button"
+//             variant="ghost"
+//             size="sm"
+//             className="text-white/70 hover:text-white hover:bg-white/10 text-sm"
+//             onClick={() =>
+//               setInputValue("Build a task management app")
+//             }>
+//             <FileText className="h-4 w-4 mr-2" />
+//             Task Manager
+//           </Button>
+//           <Button
+//             type="button"
+//             variant="ghost"
+//             size="sm"
+//             className="text-white/70 hover:text-white hover:bg-white/10 text-sm"
+//             onClick={() =>
+//               setInputValue("Design a social media dashboard")
+//             }>
+//             <Zap className="h-4 w-4 mr-2" />
+//             Dashboard
+//           </Button>
+//         </div>
+//       </div>
+//     </div>
+
+//     {/* Drag and drop indicator */}
+//     {dragActive && (
+//       <div className="absolute inset-0 bg-white/20 backdrop-blur-sm rounded-3xl flex items-center justify-center">
+//         <div className="text-center">
+//           <Upload className="h-12 w-12 text-white mx-auto mb-4" />
+//           <p className="text-white text-lg font-medium">
+//             Drop your files here
+//           </p>
+//         </div>
+//       </div>
+//     )}
+//   </form>
+
+//   <p className="text-white/60 text-sm mt-4">
+//     Supports text and images. Start typing or drag & drop to begin.
+//   </p>
+// </div>;
