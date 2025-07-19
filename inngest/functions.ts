@@ -17,6 +17,7 @@ import { PROMPT, FRAGMENT_TITLE_PROMPT, RESPONSE_PROMPT } from "@/prompts";
 import { title } from "node:process";
 import prisma from "@/lib/db";
 import path from "node:path";
+import { SANDBOX_TIMEOUT } from "./types";
 
 interface AgentState {
   summary: string;
@@ -31,6 +32,7 @@ export const codeAgentFunction = inngest.createFunction(
   async ({ event, step }) => {
     const sandboxId = await step.run("get-sandbox-id", async () => {
       const sandbox = await Sandbox.create("enligtii-nextjs-20250627-001");
+      await sandbox.setTimeout(SANDBOX_TIMEOUT)
       return sandbox.sandboxId;
     });
 
@@ -45,7 +47,8 @@ export const codeAgentFunction = inngest.createFunction(
           },
           orderBy: {
             createdAt: "desc" //todo change to asc if ai does not understand what is the latest message.
-          }
+          },
+          take: 5,
         });
 
         for (const message of messages) {
@@ -55,7 +58,7 @@ export const codeAgentFunction = inngest.createFunction(
             content: message.content
           });
         }
-        return formattedMessages;
+        return formattedMessages.reverse();
       }
     );
 
