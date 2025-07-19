@@ -12,11 +12,11 @@ export default function Home() {
     <>
       <div className="flex flex-col max-w-5xl mx-auto w-full">
         <section className="space-y-6 py-[16h] 2xl:py-48">
-          <div className="flex flex-col items-center">
+          {/* <div className="flex flex-col items-center">
             <Lightbulb width={50} height={50} className="hidden md:block" />
-          </div>
+          </div> */}
 
-          <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="relative z-10 mt-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             {/* Icon cluster */}
 
             {/* Main heading with typewriter effect */}

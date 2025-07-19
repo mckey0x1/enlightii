@@ -19,7 +19,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider appearance={{variables:{
+      // colorPrimary:"#C96342"
+    }}}>
       <TRPCReactProvider>
         <html lang="en" className="scroll-smooth">
           <body className={inter.className}>
